@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -35,8 +36,12 @@ namespace TeamSpeak3.Metrics.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<ServerOptions>(_configuration.GetSection("App:TS3Server"));
-            services.AddTeamSpeak3Metrics().AsHostedService();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTeamSpeak3Metrics()
+                    .AsHostedService(TimeSpan.FromSeconds(15));
+
+            services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
     }
 }
