@@ -1,0 +1,10 @@
+.idea/
+
+[Bb]in/
+[Oo]bj/
+
+nupkg/
+
+appsettings.*.json
+
+*.DotSettings.user

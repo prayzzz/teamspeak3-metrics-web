@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <OutputType>exe</OutputType>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <RuntimeIdentifiers>win10-x64;linux-x64</RuntimeIdentifiers>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="7.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="TeamSpeak3.Metrics.AspNetCore" Version="0.1.1" />
+        <!-- <ProjectReference Include="..\..\..\TeamSpeak3.Metrics\src\TeamSpeak3.Metrics.AspNetCore\TeamSpeak3.Metrics.AspNetCore.csproj"/> -->
+    </ItemGroup>
+    
+</Project>
