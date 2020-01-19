@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TeamSpeak3.Metrics.AspNetCore;
 using TeamSpeak3.Metrics.Common;
@@ -22,7 +22,7 @@ namespace TeamSpeak3.Metrics.Web
             _logger = logger;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -30,7 +30,9 @@ namespace TeamSpeak3.Metrics.Web
             }
 
             app.UseStartupInfoLogging(_logger);
-            app.UseMvc();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -40,8 +42,7 @@ namespace TeamSpeak3.Metrics.Web
             services.AddTeamSpeak3Metrics()
                     .AsHostedService(TimeSpan.FromSeconds(15));
 
-            services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
         }
     }
 }
