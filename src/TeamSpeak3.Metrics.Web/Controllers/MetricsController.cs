@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TeamSpeak3.Metrics.AspNetCore.Hosted;
 using TeamSpeak3.Metrics.Models;
@@ -19,7 +20,7 @@ namespace TeamSpeak3.Metrics.Web.Controllers
         [HttpGet]
         public IEnumerable<TeamSpeak3Metrics> Get()
         {
-            return _metricCollectorCache.Current;
+            return _metricCollectorCache.Current ?? Enumerable.Empty<TeamSpeak3Metrics>();
         }
     }
 }

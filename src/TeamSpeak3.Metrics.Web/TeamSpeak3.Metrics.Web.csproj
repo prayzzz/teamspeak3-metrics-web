@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="TeamSpeak3.Metrics.AspNetCore" Version="0.2.0" />
+        <PackageReference Include="TeamSpeak3.Metrics.AspNetCore" Version="0.3.0" />
         <!--        <ProjectReference Include="..\..\..\teamspeak3-metrics\src\TeamSpeak3.Metrics.AspNetCore\TeamSpeak3.Metrics.AspNetCore.csproj" />-->
     </ItemGroup>
 

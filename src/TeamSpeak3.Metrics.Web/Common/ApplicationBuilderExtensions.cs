@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace TeamSpeak3.Metrics.Web.Common
@@ -12,10 +13,10 @@ namespace TeamSpeak3.Metrics.Web.Common
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var applicationLifetime = scope.ServiceProvider.GetService<IApplicationLifetime>();
+                var applicationLifetime = scope.ServiceProvider.GetService<IHostApplicationLifetime>();
                 applicationLifetime.ApplicationStarted.Register(() =>
                 {
-                    var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+                    var hostingEnvironment = app.ApplicationServices.GetService<IWebHostEnvironment>();
                     logger.LogInformation("Hosting environment: {EnvironmentName}", hostingEnvironment.EnvironmentName);
                     logger.LogInformation("Content root path: {ContentRootPath}", hostingEnvironment.ContentRootPath);
 
