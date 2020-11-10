@@ -37,7 +37,7 @@ jobs:
 
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' }}
-      run: dotnet publish -c release -o ./app --no-restore
+      run: dotnet publish -c release -o ./app --no-restore TeamSpeak3.Metrics.Web.sln
 
     - name: Docker Build
       if: ${{ github.ref == 'refs/heads/master' }}
