@@ -13,14 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      
+
     - uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
-          
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -28,10 +28,10 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore TeamSpeak3.Metrics.Web.sln
-  
+
     - name: Build
       run: dotnet build --configuration Release --no-restore TeamSpeak3.Metrics.Web.sln
-    
+
     - name: Test
       run: dotnet test --no-restore --verbosity normal TeamSpeak3.Metrics.Web.sln
 
@@ -39,7 +39,16 @@ jobs:
       if: ${{ github.ref == 'refs/heads/master' }}
       run: dotnet publish -c release -o ./app --no-restore TeamSpeak3.Metrics.Web.sln
 
-    - name: Docker Build
+    - name: Login to DockerHub
       if: ${{ github.ref == 'refs/heads/master' }}
-      run: docker build --pull -t teamspeak3-metrics-web:latest .
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Docker
+      if: ${{ github.ref == 'refs/heads/master' }}
+      run: | 
+        docker build --pull -t teamspeak3-metrics-web:latest .
+        docker push prayzzz/teamspeak3-metrics-web:latest
 
