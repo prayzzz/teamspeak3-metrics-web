@@ -27,13 +27,13 @@ jobs:
         dotnet-version: 5.0.100
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore TeamSpeak3.Metrics.Web.sln
   
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore TeamSpeak3.Metrics.Web.sln
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal TeamSpeak3.Metrics.Web.sln
 
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' }}
