@@ -45,7 +45,7 @@ jobs:
         echo 'CURRENT_VERSION<<EOF' >> $GITHUB_ENV
         git describe --tags >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
-        docker build --pull -t prayzzz/teamspeak3-metrics-web:latest -t prayzzz/teamspeak3-metrics-web:${{ env.CURRENT_VERSION }} .
+        docker build --pull -t prayzzz/teamspeak3-metrics-web:latest -t prayzzz/teamspeak3-metrics-web:$CURRENT_VERSION .
         docker push prayzzz/teamspeak3-metrics-web:latest
-        docker push prayzzz/teamspeak3-metrics-web:${{ env.CURRENT_VERSION }}
+        docker push prayzzz/teamspeak3-metrics-web:$CURRENT_VERSION
 
