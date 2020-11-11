@@ -25,6 +25,9 @@ jobs:
       with:
         dotnet-version: 5.0.100
 
+    - name: Set version
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
     - name: Install dependencies
       run: dotnet restore TeamSpeak3.Metrics.Web.sln
 
@@ -42,10 +45,7 @@ jobs:
 
     - name: Docker
       run: | 
-        echo 'CURRENT_VERSION<<EOF' >> $GITHUB_ENV
-        git describe --tags >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-        docker build --pull -t prayzzz/teamspeak3-metrics-web:latest -t prayzzz/teamspeak3-metrics-web:$CURRENT_VERSION .
+        docker build --pull -t prayzzz/teamspeak3-metrics-web:latest -t prayzzz/teamspeak3-metrics-web:${{ env.RELEASE_VERSION }} .
         docker push prayzzz/teamspeak3-metrics-web:latest
-        docker push prayzzz/teamspeak3-metrics-web:$CURRENT_VERSION
+        docker push prayzzz/teamspeak3-metrics-web:${{ env.RELEASE_VERSION }}
 
