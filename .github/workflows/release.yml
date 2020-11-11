@@ -42,7 +42,7 @@ jobs:
 
     - name: Docker
       run: | 
-        echo 'git describe' >> $GIT_TAG
+        echo 'git describe --tags' >> $GIT_TAG
         docker build --pull -t prayzzz/teamspeak3-metrics-web:latest -t prayzzz/teamspeak3-metrics-web:${{ env.GIT_TAG }} .
         docker push prayzzz/teamspeak3-metrics-web:latest
         docker push prayzzz/teamspeak3-metrics-web:${{ env.GIT_TAG }}
